@@ -1,2 +1,2 @@
-# The AZPay sdk for Node.js
+# The AZPay SDK for Node.js
 Dont use
