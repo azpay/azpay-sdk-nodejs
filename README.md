@@ -1,2 +1,2 @@
-# azpay-sdk-nodejs
-The AZPay sdk for Node.js
+# The AZPay sdk for Node.js
+Dont use
