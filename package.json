@@ -1,8 +1,8 @@
 {
-  "name": "azpay-sdk",
+  "name": "azpay",
   "version": "0.1.0",
   "description": "The AZPay SDK for Node.js",
-  "main": "azpay.js",
+  "main": "./lib/azpay.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon ./azpay --exec babel-node --presets=env",
     "test": "jest",
@@ -23,7 +23,8 @@
   "author": "Lucas Emanoel",
   "license": "MIT",
   "dependencies": {
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0"
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
