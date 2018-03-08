@@ -1,5 +1,6 @@
 import Azpay from '../lib/azpay';
 
+
 test('Create a credit card authorization', () => {
   expect.assertions(1);
 
@@ -46,20 +47,27 @@ test('Create a credit card authorization', () => {
 
   const urlReturn = 'urlde.test.com/ordertal';
 
-  const antiFraud = {
-    enabled: 'false',
-  };
+  const fraud = 'false';
 
-  const transaction = azpay.transaction({
+  const transaction = azpay.transaction();
+
+  const data = {
     order,
     payment,
     billing,
     urlReturn,
-    antiFraud,
-  });
+    fraud,
+  };
 
 
-  return transaction.authorize()
-    .then(response => expect(response.status).toBe(409))
-    .catch(error => expect(error.response.status).toBe(409));
+  const tid = '7055A4FB-86C8-ABC5-16DC-8DCEFF0CA22F';
+
+  return transaction.get(tid)
+    .then((response) => {
+      console.log(response.data);
+      return expect(response.status).toBe(200);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
