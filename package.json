@@ -2,12 +2,13 @@
   "name": "azpay",
   "version": "0.0.0",
   "description": "The AZPay SDK for Node.js",
-  "main": "./lib/azpay.js",
+  "main": "./dist/azpay.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon ./azpay --exec babel-node --presets=env",
     "test": "jest",
     "test-ci": "jest --coverage",
-    "lint": "eslint"
+    "lint": "eslint",
+    "webpack": "webpack"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,11 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
