@@ -19,4 +19,6 @@ Run on your terminal:
 yarn test
 ```
 
+<aside class="notice">
 PS: The test.config.js file is ignored on .gitignore
+</aside>
