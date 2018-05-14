@@ -3,4 +3,8 @@
   "extends": "airbnb",
   "plugins": ["jest"],
   "env": {"jest": true},
+  "rules": {
+    "no-console": ["error", { "allow": ["info", "warn", "error"] }],
+    "no-underscore-dangle": "off",
+  }
 }
