@@ -2,7 +2,7 @@
   "name": "azpay",
   "version": "0.0.1",
   "description": "The AZPay SDK for Node.js",
-  "main": "./dist/azpay.js",
+  "main": "./dist/lib/index.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon ./azpay --exec babel-node --presets=env",
     "test": "NODE_ENV=test jest --watch",
@@ -29,18 +29,16 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^22.4.3",
+    "babel-loader": "^7.1.4",
     "babel-plugin-syntax-export-extensions": "^6.13.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -52,7 +50,10 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
     "jest": "^22.4.3",
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.17.4",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-node-externals": "^1.7.2"
   },
   "jest": {
     "testEnvironment": "node"
