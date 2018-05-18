@@ -475,10 +475,11 @@ var Transaction = function () {
                 throw new Error('Operation unavailable for this transaction');
 
               case 2:
-                _context7.next = 4;
+                _context7.prev = 2;
+                _context7.next = 5;
                 return this.request(OPERATIONS.boleto, data);
 
-              case 4:
+              case 5:
                 response = _context7.sent;
 
 
@@ -494,12 +495,17 @@ var Transaction = function () {
 
                 return _context7.abrupt('return', response);
 
-              case 8:
+              case 11:
+                _context7.prev = 11;
+                _context7.t0 = _context7['catch'](2);
+                throw new Error(_context7.t0);
+
+              case 14:
               case 'end':
                 return _context7.stop();
             }
           }
-        }, _callee7, this);
+        }, _callee7, this, [[2, 11]]);
       }));
 
       function boleto(_x8) {
