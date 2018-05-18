@@ -1,5 +1,11 @@
 # AZPAY SDK for Node (WARNING: IN DEVELOPMENT)
 
+<p align="left">
+  <a href="https://www.npmjs.com/package/azpay">
+    <img alt="npm" src="https://img.shields.io/badge/npm-0.0.1-orange.svg?style=flat-square" />
+  </a>
+</p>
+
 This SDK is currently in development. Coming soon :)
 
 ## Installing
