@@ -1,4 +1,4 @@
-# AZPAY SDK for Node (WARNING: IN DEVELOPMENT!!)
+# AZPAY SDK for Node (WARNING: IN DEVELOPMENT)
 
 This SDK is currently in development. Coming soon :)
 
@@ -25,7 +25,7 @@ const azpay = Azpay({
 
 Your need to have the AZPAY object (created before)
 
-### Using Javascript ES8 ASYNC/AWAIT
+### Using Javascript ES8 ASYNC/AWAIT:
 
 ```javascript
 try {
@@ -48,7 +48,7 @@ try {
 
 ```
 
-### Using Promises
+### Using Promises:
 
 ```javascript
 azpay.transaction.sale({
@@ -70,7 +70,7 @@ azpay.transaction.sale({
   });
 ```
 
-## How to run the tests (For Developers Only)
+## How to run the tests (For the SDK developers only)
 
 You must have a config file on the root called test.config.js:
 
