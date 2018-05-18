@@ -477,7 +477,7 @@ var Transaction = function () {
               case 2:
                 _context7.prev = 2;
                 _context7.next = 5;
-                return this.request(OPERATIONS.boleto, data);
+                return this.request(OPERATIONS.BOLETO, data);
 
               case 5:
                 response = _context7.sent;
