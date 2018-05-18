@@ -1,8 +1,4 @@
-'use strict';
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var axios = _interopDefault(require('axios'));
+import axios from 'axios';
 
 function generateObject(data) {
   if (!data.order) throw new Error('Need to set order object on sale');else if (!data.payment) throw new Error('Need to set payment object on sale');else if (!data.billing) throw new Error('Need to set billing object on sale');
@@ -531,4 +527,4 @@ function azpay(credentials) {
   };
 }
 
-module.exports = azpay;
+export default azpay;
