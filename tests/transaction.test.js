@@ -1,8 +1,8 @@
-import Azpay from '../lib/azpay';
+import Azpay from '../lib/index';
 import config from '../test.config';
 
 describe('Transaction', () => {
-  const azpay = new Azpay({
+  const azpay = Azpay({
     id: config.merchant_id,
     key: config.merchant_key,
   });

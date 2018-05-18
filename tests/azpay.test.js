@@ -1,4 +1,4 @@
-import Azpay from '../lib/azpay';
+import Azpay from '../lib/index';
 import Transaction from '../lib/transaction';
 
 describe('AZPAY Main Class', () => {
@@ -7,10 +7,7 @@ describe('AZPAY Main Class', () => {
       id: 'merchantid',
       key: 'merchantkey',
     };
-    const azpay = new Azpay(credentials);
-    // Must have a merchant id and merchant key
-    expect(azpay.id).toEqual('merchantid');
-    expect(azpay.key).toEqual('merchantkey');
+    const azpay = Azpay(credentials);
     // Must have a transaction object
     expect(azpay.transaction).toBeInstanceOf(Transaction);
   });

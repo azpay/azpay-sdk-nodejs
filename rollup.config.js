@@ -16,7 +16,12 @@ export default [
     ],
     plugins: [
       babel({
+        babelrc: false,
         exclude: ['node_modules/**'],
+        plugins: ['external-helpers'],
+        presets: [
+          ['env', { modules: false }],
+        ],
       }),
     ],
   },
