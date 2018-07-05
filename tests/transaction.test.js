@@ -24,7 +24,7 @@ describe('Transaction', () => {
     cardHolder: 'Jose da Silva',
     cardNumber: '5453010000066167',
     cardSecurityCode: '123',
-    cardExpirationDate: '201805',
+    cardExpirationDate: '202007',
     saveCreditCard: 'true',
     generateToken: 'true',
     departureTax: '0',
