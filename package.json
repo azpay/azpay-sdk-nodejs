@@ -1,6 +1,6 @@
 {
   "name": "azpay",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The AZPay SDK for Node.js",
   "main": "./dist/lib/index.js",
   "module": "./dist/lib/index.esm.js",
