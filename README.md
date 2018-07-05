@@ -70,7 +70,7 @@ azpay.transaction.sale({
   });
 ```
 
-## How to run the tests (For the SDK developers only)
+## How to run the tests (For SDK developers only)
 
 You must have a config file on the root called test.config.js:
 
