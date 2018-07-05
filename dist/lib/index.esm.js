@@ -40,7 +40,8 @@ function generateObject(data) {
     },
     urlReturn: data.urlReturn,
     fraud: data.fraud,
-    customField: data.customField
+    customField: data.customField,
+    partnerID: data.partnerID
   };
 }
 
