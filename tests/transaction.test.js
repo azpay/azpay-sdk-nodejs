@@ -12,7 +12,7 @@ describe('Transaction', () => {
     totalAmount: '12345',
   };
 
-  const payment = {
+  const paymentSale = {
     acquirer: '1',
     method: '1',
     amount: '12345',
@@ -30,6 +30,12 @@ describe('Transaction', () => {
     departureTax: '0',
   };
 
+  const paymentPaypal = {
+    amount: '12345',
+    currency: '986',
+    country: 'BRA',
+  };
+
   const billing = {
     customerIdentity: '1',
     name: 'Fulano de tal',
@@ -45,19 +51,41 @@ describe('Transaction', () => {
 
   const urlReturn = 'http://urlde.test.com/ordertal';
   const fraud = 'false';
-  const data = {
+
+  const dataSale = {
     order,
-    payment,
+    payment: paymentSale,
     billing,
     urlReturn,
     fraud,
   };
 
+  const dataPaypal = {
+    order,
+    payment: paymentPaypal,
+    billing,
+    urlReturn,
+  };
+
   it('Should make a sale transaction', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
-      const response = await azpay.transaction.sale(data);
+      const response = await azpay.transaction.sale(dataSale);
       expect(response).toBeTruthy();
+      expect(response.transactionId).toBeTruthy();
+    } catch (error) {
+      console.info(error);
+    }
+  });
+
+  it('Should make a paypal transaction', async () => {
+    expect.assertions(4);
+    try {
+      const response = await azpay.transaction.paypal(dataPaypal);
+      expect(response).toBeTruthy();
+      expect(response.transactionId).toBeTruthy();
+      expect(response.processor).toBeTruthy();
+      expect(response.processor.urlReturn).toBeTruthy();
     } catch (error) {
       console.info(error);
     }

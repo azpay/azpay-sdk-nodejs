@@ -49,6 +49,39 @@ var Sale = {
   generateObject: generateObject
 };
 
+function generateObject$1(data) {
+  if (!data.order) throw new Error('Need to set order object on paypal');else if (!data.payment) throw new Error('Need to set payment object on paypal');else if (!data.billing) throw new Error('Need to set billing object on paypal');
+
+  return {
+    order: {
+      reference: data.order.reference,
+      totalAmount: data.order.totalAmount
+    },
+    payment: {
+      amount: data.payment.amount,
+      currency: data.payment.currency,
+      country: data.payment.country
+    },
+    billing: {
+      customerIdentity: data.billing.customerIdentity,
+      name: data.billing.name,
+      address: data.billing.address,
+      address2: data.billing.address2,
+      city: data.billing.city,
+      state: data.billing.state,
+      postalCode: data.billing.postalCode,
+      country: data.billing.country,
+      phone: data.billing.phone,
+      email: data.billing.email
+    },
+    urlReturn: data.urlReturn
+  };
+}
+
+var Paypal = {
+  generateObject: generateObject$1
+};
+
 var asyncToGenerator = function (fn) {
   return function () {
     var gen = fn.apply(this, arguments);
@@ -122,6 +155,7 @@ var defineProperty = function (obj, key, value) {
  */
 var OPERATIONS = {
   SALE: 'sale',
+  PAYPAL: 'paypal',
   BOLETO: 'boleto',
   REPORT: 'report',
   CAPTURE: 'capture'
@@ -135,16 +169,6 @@ var Transaction = function () {
     this.id = id;
     this.key = key;
     this.apiUrl = apiUrl;
-
-    // Available actions
-    this.actions = {
-      get: true,
-      authorize: true,
-      sale: true,
-      capture: true,
-      cancel: true,
-      boleto: true
-    };
   }
 
   createClass(Transaction, [{
@@ -176,25 +200,21 @@ var Transaction = function () {
 
               case 3:
                 response = _context.sent;
+                return _context.abrupt('return', response.data);
 
-                // Setting report object as response
-                this.report = response;
-                // Returning the response
-                return _context.abrupt('return', response);
-
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context['catch'](0);
 
                 console.info(_context.t0.response.data);
                 throw new Error(_context.t0);
 
-              case 12:
+              case 11:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee, this, [[0, 7]]);
       }));
 
       function request(_x, _x2) {
@@ -212,33 +232,14 @@ var Transaction = function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (this.actions.get) {
-                  _context2.next = 2;
-                  break;
-                }
-
-                throw new Error('Operation unavailable for this transaction');
-
-              case 2:
-                _context2.next = 4;
+                _context2.next = 2;
                 return this.request(OPERATIONS.REPORT, { transactionId: tid });
 
-              case 4:
+              case 2:
                 response = _context2.sent;
-
-
-                if (response.transactionId) {
-                  this.actions.get = false;
-                  this.actions.authorize = false;
-                  this.actions.sale = false;
-                  this.actions.boleto = false;
-                }
-
-                this.report = response;
-
                 return _context2.abrupt('return', response);
 
-              case 8:
+              case 4:
               case 'end':
                 return _context2.stop();
             }
@@ -261,35 +262,14 @@ var Transaction = function () {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (this.actions.authorize) {
-                  _context3.next = 2;
-                  break;
-                }
-
-                throw new Error('Operation unavailable for this transaction');
-
-              case 2:
-                _context3.next = 4;
+                _context3.next = 2;
                 return this.request('authorize', data);
 
-              case 4:
+              case 2:
                 response = _context3.sent;
-
-
-                if (response.transactionId) {
-                  this.actions.get = false;
-                  this.actions.authorize = false;
-                  this.actions.sale = false;
-                  this.actions.boleto = false;
-
-                  if (response.status === 4) this.actions.capture = false;else if (response.status === 3) this.actions.capture = true;
-                }
-
-                this.report = response;
-
                 return _context3.abrupt('return', response);
 
-              case 8:
+              case 4:
               case 'end':
                 return _context3.stop();
             }
@@ -312,45 +292,27 @@ var Transaction = function () {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (this.actions.sale) {
-                  _context4.next = 2;
-                  break;
-                }
-
-                throw new Error('Operation unavailable for this transaction');
-
-              case 2:
                 // Getting sale object
                 saleObj = Sale.generateObject(data);
-                _context4.prev = 3;
-                _context4.next = 6;
+                _context4.prev = 1;
+                _context4.next = 4;
                 return this.request(OPERATIONS.SALE, saleObj);
 
-              case 6:
+              case 4:
                 response = _context4.sent;
-
-                // Changing available actions
-                if (response.transactionId) {
-                  this.actions.get = false;
-                  this.actions.authorize = false;
-                  this.actions.sale = false;
-                  this.actions.capture = false;
-                  this.actions.boleto = false;
-                }
-                // Returning response
                 return _context4.abrupt('return', response);
 
-              case 11:
-                _context4.prev = 11;
-                _context4.t0 = _context4['catch'](3);
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4['catch'](1);
                 throw new Error(_context4.t0);
 
-              case 14:
+              case 11:
               case 'end':
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[3, 11]]);
+        }, _callee4, this, [[1, 8]]);
       }));
 
       function sale(_x5) {
@@ -360,57 +322,45 @@ var Transaction = function () {
       return sale;
     }()
   }, {
-    key: 'capture',
+    key: 'paypal',
     value: function () {
-      var _ref5 = asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(tid) {
-        var response;
+      var _ref5 = asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(data) {
+        var paypalObj, response;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                if (this.actions.capture) {
-                  _context5.next = 2;
-                  break;
-                }
-
-                throw new Error('Operation unavailable for this transaction');
-
-              case 2:
+                // Getting paypal object
+                paypalObj = Paypal.generateObject(data);
+                _context5.prev = 1;
                 _context5.next = 4;
-                return this.request(OPERATIONS.CAPTURE, { transactionId: tid });
+                return this.request(OPERATIONS.PAYPAL, paypalObj);
 
               case 4:
                 response = _context5.sent;
-
-
-                if (response.transactionId) {
-                  this.actions.get = false;
-                  this.actions.authorize = false;
-                  this.actions.sale = false;
-                  this.actions.capture = false;
-                  this.actions.boleto = false;
-                }
-
-                this.report = response;
-
                 return _context5.abrupt('return', response);
 
               case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5['catch'](1);
+                throw new Error(_context5.t0);
+
+              case 11:
               case 'end':
                 return _context5.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee5, this, [[1, 8]]);
       }));
 
-      function capture(_x6) {
+      function paypal(_x6) {
         return _ref5.apply(this, arguments);
       }
 
-      return capture;
+      return paypal;
     }()
   }, {
-    key: 'cancel',
+    key: 'capture',
     value: function () {
       var _ref6 = asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(tid) {
         var response;
@@ -418,34 +368,14 @@ var Transaction = function () {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                if (this.actions.cancel) {
-                  _context6.next = 2;
-                  break;
-                }
-
-                throw new Error('Operation unavailable for this transaction');
+                _context6.next = 2;
+                return this.request(OPERATIONS.CAPTURE, { transactionId: tid });
 
               case 2:
-                _context6.next = 4;
-                return this.request('cancel', { transactionId: tid });
-
-              case 4:
                 response = _context6.sent;
-
-
-                if (response.transactionId) {
-                  this.actions.get = false;
-                  this.actions.authorize = false;
-                  this.actions.sale = false;
-                  this.actions.capture = false;
-                  this.actions.boleto = false;
-                }
-
-                this.report = response;
-
                 return _context6.abrupt('return', response);
 
-              case 8:
+              case 4:
               case 'end':
                 return _context6.stop();
             }
@@ -453,8 +383,38 @@ var Transaction = function () {
         }, _callee6, this);
       }));
 
-      function cancel(_x7) {
+      function capture(_x7) {
         return _ref6.apply(this, arguments);
+      }
+
+      return capture;
+    }()
+  }, {
+    key: 'cancel',
+    value: function () {
+      var _ref7 = asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(tid) {
+        var response;
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return this.request('cancel', { transactionId: tid });
+
+              case 2:
+                response = _context7.sent;
+                return _context7.abrupt('return', response);
+
+              case 4:
+              case 'end':
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function cancel(_x8) {
+        return _ref7.apply(this, arguments);
       }
 
       return cancel;
@@ -462,55 +422,35 @@ var Transaction = function () {
   }, {
     key: 'boleto',
     value: function () {
-      var _ref7 = asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(data) {
+      var _ref8 = asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(data) {
         var response;
-        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
-                if (this.actions.boleto) {
-                  _context7.next = 2;
-                  break;
-                }
-
-                throw new Error('Operation unavailable for this transaction');
-
-              case 2:
-                _context7.prev = 2;
-                _context7.next = 5;
+                _context8.prev = 0;
+                _context8.next = 3;
                 return this.request(OPERATIONS.BOLETO, data);
 
-              case 5:
-                response = _context7.sent;
+              case 3:
+                response = _context8.sent;
+                return _context8.abrupt('return', response);
 
+              case 7:
+                _context8.prev = 7;
+                _context8.t0 = _context8['catch'](0);
+                throw new Error(_context8.t0);
 
-                if (response.transactionId) {
-                  this.actions.get = false;
-                  this.actions.authorize = false;
-                  this.actions.sale = false;
-                  this.actions.capture = false;
-                  this.actions.boleto = false;
-                }
-
-                this.report = response;
-
-                return _context7.abrupt('return', response);
-
-              case 11:
-                _context7.prev = 11;
-                _context7.t0 = _context7['catch'](2);
-                throw new Error(_context7.t0);
-
-              case 14:
+              case 10:
               case 'end':
-                return _context7.stop();
+                return _context8.stop();
             }
           }
-        }, _callee7, this, [[2, 11]]);
+        }, _callee8, this, [[0, 7]]);
       }));
 
-      function boleto(_x8) {
-        return _ref7.apply(this, arguments);
+      function boleto(_x9) {
+        return _ref8.apply(this, arguments);
       }
 
       return boleto;
