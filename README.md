@@ -76,6 +76,53 @@ azpay.transaction.sale({
   });
 ```
 
+## Creating a Paypal transaction
+
+Your need to have the AZPAY object (created before)
+
+### Using Javascript ES8 ASYNC/AWAIT:
+
+```javascript
+try {
+  const response = await azpay.transaction.paypal({
+    order: {
+      ...
+    },
+    payment: {
+      ...
+    },
+    billing: {
+      ...
+    },
+    urlReturn: ...,
+  });
+} catch (error) {
+  // DEAL WITH ERROR HERE
+}
+
+```
+
+### Using Promises:
+
+```javascript
+azpay.transaction.paypal({
+  order: {
+    ...
+  },
+  payment: {
+    ...
+  },
+  billing: {
+    ...
+  },
+  urlReturn: ...,
+}).then((response) => {
+    // DEAL WITH RESPONSE
+  }).catch((error) => {
+    // DEAL WITH ERROR HERE
+  });
+```
+
 ## How to run the tests (For SDK developers only)
 
 You must have a config file on the root called test.config.js:
