@@ -79,13 +79,33 @@ describe('Transaction', () => {
   });
 
   it('Should make a paypal transaction', async () => {
-    expect.assertions(4);
+    expect.assertions(5);
     try {
       const response = await azpay.transaction.paypal(dataPaypal);
       expect(response).toBeTruthy();
       expect(response.transactionId).toBeTruthy();
       expect(response.processor).toBeTruthy();
       expect(response.processor.urlReturn).toBeTruthy();
+      expect(response.processor.details.id).toBeTruthy();
+    } catch (error) {
+      console.info(error);
+    }
+  });
+
+  it('Should make a paypal plus transaction', async () => {
+    expect.assertions(5);
+    try {
+      const dataPaypalPlus = dataPaypal;
+      dataPaypalPlus.payment = {
+        method: 'plus',
+        ...dataPaypalPlus.payment,
+      };
+      const response = await azpay.transaction.paypal(dataPaypalPlus);
+      expect(response).toBeTruthy();
+      expect(response.transactionId).toBeTruthy();
+      expect(response.processor).toBeTruthy();
+      expect(response.processor.urlReturn).toBeTruthy();
+      expect(response.processor.details.id).toBeTruthy();
     } catch (error) {
       console.info(error);
     }

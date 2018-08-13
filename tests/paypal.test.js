@@ -35,7 +35,6 @@ describe('Paypal Model', () => {
     payment: {
       saveCreditCard: 'true',
       groupNumber: '0',
-      method: '1',
       acquirer: '1',
       amount: '10000',
       currency: '986',
