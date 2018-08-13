@@ -8,20 +8,20 @@ export default [
   // builds from a single configuration where possible, using
   // the `targets` option which can specify `dest` and `format`)
   {
-    entry: 'lib/index.js',
+    input: 'lib/index.js',
     external: ['axios'],
-    targets: [
-      { dest: pkg.main, format: 'cjs' },
-      { dest: pkg.module, format: 'es' },
+    output: [
+      { file: pkg.main, format: 'cjs' },
+      { file: pkg.module, format: 'es' },
     ],
     plugins: [
       babel({
-        babelrc: false,
+        babelrc: true,
         exclude: ['node_modules/**'],
-        plugins: ['external-helpers'],
-        presets: [
-          ['env', { modules: false }],
-        ],
+        // plugins: ['@babel/plugin-external-helpers'],
+        // presets: [
+        //   ['env', { modules: false }],
+        // ],
       }),
     ],
   },
