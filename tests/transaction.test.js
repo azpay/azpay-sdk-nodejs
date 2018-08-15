@@ -93,7 +93,7 @@ describe('Transaction', () => {
   });
 
   it('Should make a paypal plus transaction', async () => {
-    expect.assertions(5);
+    expect.assertions(6);
     try {
       const dataPaypalPlus = dataPaypal;
       dataPaypalPlus.payment = {
@@ -104,7 +104,8 @@ describe('Transaction', () => {
       expect(response).toBeTruthy();
       expect(response.transactionId).toBeTruthy();
       expect(response.processor).toBeTruthy();
-      expect(response.processor.urlReturn).toBeTruthy();
+      expect(response.processor.details.urlPayment).toBeTruthy();
+      expect(response.processor.details.urlExecute).toBeTruthy();
       expect(response.processor.details.id).toBeTruthy();
     } catch (error) {
       console.info(error);
