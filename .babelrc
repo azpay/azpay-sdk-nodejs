@@ -8,6 +8,13 @@
     ]
   ],
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread"
-  ]
+    "@babel/plugin-proposal-object-rest-spread",
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "@babel/plugin-transform-modules-commonjs"
+      ]
+    }
+  }
 }
