@@ -210,45 +210,49 @@ function () {
       var _request = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(operation, data) {
-        var response;
+        var params, response;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                params = {
+                  'transaction-request': _defineProperty({
+                    version: '1.0.0',
+                    verification: {
+                      merchantId: this.id,
+                      merchantKey: this.key
+                    }
+                  }, operation, data)
+                }; // Printing params
+
+                console.info(params); // Making request
+
+                _context.next = 5;
                 return axios(this.apiUrl, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json'
                   },
-                  data: JSON.stringify({
-                    'transaction-request': _defineProperty({
-                      version: '1.0.0',
-                      verification: {
-                        merchantId: this.id,
-                        merchantKey: this.key
-                      }
-                    }, operation, data)
-                  })
+                  data: JSON.stringify(params)
                 });
 
-              case 3:
+              case 5:
                 response = _context.sent;
                 return _context.abrupt("return", response.data);
 
-              case 7:
-                _context.prev = 7;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 console.info(_context.t0.response.data);
                 throw new Error(_context.t0);
 
-              case 11:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 9]]);
       }));
 
       return function request(_x, _x2) {
