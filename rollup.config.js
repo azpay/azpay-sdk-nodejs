@@ -1,4 +1,6 @@
 import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
 import pkg from './package.json';
 
 export default [
@@ -15,13 +17,12 @@ export default [
       { file: pkg.module, format: 'es' },
     ],
     plugins: [
+      resolve(),
+      commonjs(),
       babel({
         babelrc: true,
+        runtimeHelpers: true,
         exclude: ['node_modules/**'],
-        // plugins: ['@babel/plugin-external-helpers'],
-        // presets: [
-        //   ['env', { modules: false }],
-        // ],
       }),
     ],
   },
