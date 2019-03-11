@@ -2,6 +2,7 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+require('@babel/polyfill');
 var axios = _interopDefault(require('axios'));
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {

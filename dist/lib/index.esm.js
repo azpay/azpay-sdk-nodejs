@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import axios from 'axios';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
