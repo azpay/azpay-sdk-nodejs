@@ -230,7 +230,7 @@ function () {
                   }, operation, data)
                 }; // Printing params
 
-                console.info(params); // Making request
+                console.info('SENDING PARAMS', params); // Making request
 
                 _context.next = 5;
                 return axios(this.apiUrl, {
@@ -266,7 +266,7 @@ function () {
   }, {
     key: "get",
     value: function () {
-      var _get$$1 = _asyncToGenerator(
+      var _get = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(tid) {
         var response;
@@ -292,7 +292,7 @@ function () {
       }));
 
       return function get(_x3) {
-        return _get$$1.apply(this, arguments);
+        return _get.apply(this, arguments);
       };
     }()
   }, {
